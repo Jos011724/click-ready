@@ -1,0 +1,11 @@
+'use strict';
+const {test} = require('node:test');
+const assert = require('node:assert/strict');
+const {filterProducts, calculateCartTotal} = require('../core.js');
+const items = [{id:'1',name:'Arroz 1 kg',category:'Despensa',price:1890},{id:'2',name:'Leche 1 L',category:'Lácteos',price:1290}];
+test('búsqueda sin distinguir mayúsculas',()=>assert.equal(filterProducts(items,'ARROZ').length,1));
+test('filtro de categoría',()=>assert.deepEqual(filterProducts(items,'','Lácteos').map(p=>p.id),['2']));
+test('sin coincidencias',()=>assert.equal(filterProducts(items,'pan').length,0));
+test('total de carrito',()=>assert.equal(calculateCartTotal(items,new Map([['1',2],['2',1]])),5070));
+test('carrito vacío',()=>assert.equal(calculateCartTotal(items,new Map()),0));
+test('rechazo de cantidades inválidas',()=>assert.throws(()=>calculateCartTotal(items,new Map([['1',-1]])),RangeError));
