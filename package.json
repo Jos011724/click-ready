@@ -1,0 +1,8 @@
+{
+  "name":"click-ready-sprint1-demo",
+  "private":true,
+  "version":"1.1.0",
+  "description":"Prototipo académico Click&Ready para Andes Market",
+  "scripts":{"test":"node --test","check":"node --check app.js && node --check core.js && npm test"},
+  "engines":{"node":">=20"}
+}
